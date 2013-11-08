@@ -17,28 +17,30 @@ Quick Start for Development
   (already included if you do a brew install python / sudo apt-get install python-pip)
 * sqlite 3: http://www.sqlite.org
   (brew install sqlite / sudo apt-get install sqlite3)
+* foreman: https://github.com/ddollar/foreman
 
 ###First Run:
 * pip install virtualenv
-* git clone [git@github.com:waltaskew/park-o-sphere.git](git@github.com:waltaskew/park-o-sphere.git)
-* cd park-o-sphere/backend
+* git clone [git@github.com:freedomgamees/parklab.git](git@github.com:freedomgamees/parklab.git])
+* cd parklab
 * virtualenv venv
 * source venv/bin/activate
 * pip install -r requirements.txt
 * pip install -r test-requirements.txt
-* PYTHONPATH=src python src/backend/create\_db.py
-* PYTHONPATH=src python src/backend/run.py
+* PYTHONPATH=backend/src DATABASE\_URL=sqlite:///test.db python backend/src/backend/create\_db.py
+* foreman start -e .env\_dev
 
 The REST service is now available at [http://localhost:5000](http://localhost:5000)
 
 ###Subsequent Runs:
-* cd park-o-sphere/backend (if you aren't there already)
+* cd parklab (if you aren't there already)
 * source venv/bin/activate (if your shell has not already sourced this file)
 * pip install --upgrade -r requirements.txt 
   (if requirements.txt has changed and you need to install new requirements)
-* rm -f src/backend/test.db; PYTHONPATH=src python src/backend/create\_db.py
+
+* rm -f backend/src/backend/test.db; PYTHONPATH=backend/src DATABASE\_URL=sqlite:///test.db python backend/src/backend/create\_db.py
   (if the db schema has changed and you need to recreate the database but don't feel like doing a migration)
-* PYTHONPATH=src python src/backend/run.py 
+* foreman start -e .env\_dev
 
 
 Resources
